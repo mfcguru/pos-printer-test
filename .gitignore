@@ -1,0 +1,28 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.csproj.user
+
+## EF Core
+*.db
+*.db-shm
+*.db-wal
+
+## Rider / VS Code
+.idea/
+.vscode/
+
+## Logs
+logs/
+*.log
+
+## Playwright
+playwright-report/
+test-results/
+
+## OS
+.DS_Store
+Thumbs.db
