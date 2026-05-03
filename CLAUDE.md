@@ -39,8 +39,8 @@ Each feature added to the application should follow this workflow:
 3. Developers review and iterate on the feature specification.
 4. Developers initiate implementation of the spec.
 5. Use the `dotnet-agent` for all server-side and Razor Pages behavior.
-6. Use the `test-agent` to create appropriate xUnit unit tests.
-7. Use the `test-agent` to create e2e Playwright tests for at least the "happy path" of new functionality.
+6. Use the `test-agent` to create and run xUnit unit tests — all must pass before proceeding.
+7. Use the `test-agent` to create and run Playwright e2e tests for at least the "happy path" — the agent starts the app, runs the tests, and stops the app. All must pass before proceeding.
 8. Request initial Developer review.
 9. Use the `pr-agent` to run final local build/test checks and create a DRAFT pull request using the repo's PR template.
 10. Developers review pull request and mark it ready for review.
@@ -69,6 +69,11 @@ agent believes it has a good reason to work around them.
 
   Do not attempt to authenticate on behalf of the developer or pass tokens via environment variables
   as a workaround.
+
+### Build & Run
+
+- Before running `dotnet build`, always stop any running instance of the app — the `.exe` is locked while the process is alive and the build will fail with MSB3027.
+- To stop the app: `Get-Process -Name "POSPrinterTest*","dotnet" -ErrorAction SilentlyContinue | Stop-Process -Force`
 
 ### Code Style
 
