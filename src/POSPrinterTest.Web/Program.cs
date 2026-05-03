@@ -1,7 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using POSPrinterTest.Web.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = GetProjectDirectory()
+});
+
+static string GetProjectDirectory([System.Runtime.CompilerServices.CallerFilePath] string path = "")
+    => System.IO.Path.GetDirectoryName(path)!;
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
