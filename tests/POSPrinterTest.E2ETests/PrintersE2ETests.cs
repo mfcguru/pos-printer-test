@@ -19,7 +19,7 @@ public class PrintersE2ETests : IAsyncLifetime
     private IPage _page = null!;
 
     private static string BaseUrl =>
-        Environment.GetEnvironmentVariable("BASE_URL") ?? "https://localhost:7000";
+        Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5050";
 
     public async Task InitializeAsync()
     {
