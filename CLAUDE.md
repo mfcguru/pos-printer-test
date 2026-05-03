@@ -20,9 +20,15 @@ allows adding, editing, and deleting printers.
 ## Tech Stack
 
 - **Framework**: .NET 8, ASP.NET Core Razor Pages
-- **Database**: SQLite via Entity Framework Core
+- **Database**: Microsoft SQL Server (MSSQL) via Entity Framework Core
 - **Testing**: xUnit (unit), Playwright (e2e)
 - **CI**: GitHub Actions
+
+### Folder Conventions (Vertical Slice Architecture)
+- All feature pages live under `src/POSPrinterTest.Web/Features/<FeatureName>/<SliceName>/`
+- Shared infrastructure (DbContext, global layout) stays in `Data/` and `Pages/Shared/`
+- Each slice folder contains: the `.cshtml` view, the `.cshtml.cs` page model, and any slice-local command/query classes
+- No cross-slice dependencies — slices communicate only through shared services in `Data/`
 
 ## Workflow
 
@@ -68,5 +74,5 @@ agent believes it has a good reason to work around them.
 
 - Use C# 12 features where appropriate.
 - Razor Pages only — no MVC controllers, no Blazor, no minimal API endpoints (except health checks).
-- EF Core with SQLite for persistence. Always use migrations.
+- EF Core with Microsoft SQL Server for persistence. Always use migrations.
 - Keep page models thin — business logic belongs in services registered via DI.

@@ -3,6 +3,7 @@
     <Project Path="src/POSPrinterTest.Web/POSPrinterTest.Web.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/POSPrinterTest.E2ETests/POSPrinterTest.E2ETests.csproj" />
     <Project Path="tests/POSPrinterTest.Tests/POSPrinterTest.Tests.csproj" />
   </Folder>
 </Solution>

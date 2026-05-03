@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using POSPrinterTest.Web.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IPrinterService, PrinterService>();
+builder.Services.AddScoped<IPrintService, PrintService>();
+
+builder.Services.AddRazorPages(options =>
+{
+    options.RootDirectory = "/";
+});
 
 var app = builder.Build();
 

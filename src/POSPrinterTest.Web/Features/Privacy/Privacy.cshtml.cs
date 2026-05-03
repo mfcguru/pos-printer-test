@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace POSPrinterTest.Web.Pages;
+namespace POSPrinterTest.Web.Features.Privacy;
 
 public class PrivacyModel : PageModel
 {
@@ -16,4 +15,3 @@ public class PrivacyModel : PageModel
     {
     }
 }
-

@@ -1,0 +1,34 @@
+@page "/"
+@model POSPrinterTest.Web.Features.TestPrint.IndexModel
+@{
+    ViewData["Title"] = "Test Print";
+}
+
+<h1>Test Print</h1>
+
+@if (Model.PrintSuccess.HasValue)
+{
+    <div class="alert @(Model.PrintSuccess.Value ? "alert-success" : "alert-danger")" role="alert">
+        @Model.ResultMessage
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="SelectedPrinterId" class="form-label">Printer</label>
+        <select asp-for="SelectedPrinterId" asp-items="Model.PrinterOptions" class="form-select">
+            <option value="" disabled selected>-- Select a printer --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PrintContent" class="form-label">Content</label>
+        <textarea asp-for="PrintContent" class="form-control" rows="6"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Test Print</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

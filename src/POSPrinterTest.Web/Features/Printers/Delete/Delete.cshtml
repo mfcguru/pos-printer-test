@@ -1,0 +1,16 @@
+@page "/Printers/Delete/{id:int}"
+@model POSPrinterTest.Web.Features.Printers.Delete.DeleteModel
+@{
+    ViewData["Title"] = "Delete Printer";
+}
+
+<h1>Delete Printer</h1>
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete the printer <strong>@Model.PrinterName</strong>?</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="/Features/Printers/List/Index" class="btn btn-secondary">Cancel</a>
+</form>
