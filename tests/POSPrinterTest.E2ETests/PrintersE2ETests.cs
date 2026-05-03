@@ -43,6 +43,17 @@ public class PrintersE2ETests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task Navbar_PrintersLink_NavigatesToPrintersPage()
+    {
+        await _page.GotoAsync(BaseUrl);
+        await _page.ClickAsync("a:has-text('Printers')");
+        await _page.WaitForURLAsync($"{BaseUrl}/Printers");
+
+        var heading = await _page.TextContentAsync("h1");
+        Assert.Equal("Printers", heading?.Trim());
+    }
+
+    [Fact]
     public async Task PrintersList_LoadsSuccessfully()
     {
         await _page.GotoAsync($"{BaseUrl}/Printers");
