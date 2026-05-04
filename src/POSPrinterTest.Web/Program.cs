@@ -14,6 +14,7 @@ static string GetProjectDirectory([System.Runtime.CompilerServices.CallerFilePat
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IPrinterService, PrinterService>();
+builder.Services.AddSingleton<IRawPrinter, WindowsRawPrinter>();
 builder.Services.AddScoped<IPrintService, PrintService>();
 
 builder.Services.AddRazorPages(options =>

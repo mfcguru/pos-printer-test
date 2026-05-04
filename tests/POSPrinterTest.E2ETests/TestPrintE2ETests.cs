@@ -60,30 +60,21 @@ public class TestPrintE2ETests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task TestPrintPage_WithPrinter_ShowsSuccessAlert()
+    public async Task TestPrintPage_WithEpsonPrinter_ShowsSuccess()
     {
-        // Create a printer first
-        await _page.GotoAsync($"{BaseUrl}/Printers/Create");
-        var printerName = $"Test Printer {Guid.NewGuid():N}";
-        await _page.FillAsync("input[name='Input.Name']", printerName);
-        await _page.SelectOptionAsync("select[name='Input.ConnectionType']", "Network");
-        await _page.FillAsync("input[name='Input.ConnectionString']", "10.0.0.1");
-        await _page.ClickAsync("button[type='submit']");
-        await _page.WaitForURLAsync($"{BaseUrl}/Printers");
-
-        // Navigate to Test Print page
         await _page.GotoAsync(BaseUrl);
         await _page.WaitForSelectorAsync("select[name='SelectedPrinterId']");
 
-        // Select the printer by label text
-        await _page.SelectOptionAsync("select[name='SelectedPrinterId']", new SelectOptionValue { Label = printerName });
-        await _page.FillAsync("textarea[name='PrintContent']", "Hello POS Printer!");
+        await _page.SelectOptionAsync("select[name='SelectedPrinterId']", new SelectOptionValue { Label = "Epson TM-T82" });
+        await _page.FillAsync("textarea[name='PrintContent']", "Hello POS Printer!\nPlaywright E2E test print.");
         await _page.ClickAsync("button[type='submit']");
 
-        // Should show success alert
-        await _page.WaitForSelectorAsync(".alert-success");
-        var alertText = await _page.TextContentAsync(".alert-success");
+        // Wait for any result alert to appear
+        await _page.WaitForSelectorAsync(".alert-success, .alert-danger");
 
-        Assert.Contains(printerName, alertText);
+        var successVisible = await _page.IsVisibleAsync(".alert-success");
+        var alertText = await _page.TextContentAsync(".alert-success, .alert-danger");
+
+        Assert.True(successVisible, $"Expected print success but got: {alertText?.Trim()}");
     }
 }
