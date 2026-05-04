@@ -1,0 +1,47 @@
+@page "/Printers/Edit/{id:int}"
+@model POSPrinterTest.Web.Features.Printers.Edit.EditModel
+@{
+    ViewData["Title"] = "Edit Printer";
+}
+
+<h1>Edit Printer</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Name" class="form-label">Name</label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.ConnectionType" class="form-label">Connection Type</label>
+                <select asp-for="Input.ConnectionType" class="form-select">
+                    <option value="">-- Select --</option>
+                    <option value="Network">Network</option>
+                    <option value="USB">USB</option>
+                    <option value="Serial">Serial</option>
+                </select>
+                <span asp-validation-for="Input.ConnectionType" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.ConnectionString" class="form-label">Connection String</label>
+                <input asp-for="Input.ConnectionString" class="form-control" />
+                <span asp-validation-for="Input.ConnectionString" class="text-danger"></span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-page="/Features/Printers/List/Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

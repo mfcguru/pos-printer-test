@@ -1,0 +1,35 @@
+@page "/Printers"
+@model POSPrinterTest.Web.Features.Printers.List.IndexModel
+@{
+    ViewData["Title"] = "Printers";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Printers</h1>
+    <a asp-page="/Features/Printers/Create/Create" class="btn btn-primary">Add Printer</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Connection Type</th>
+            <th>Connection String</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var printer in Model.Printers)
+        {
+            <tr>
+                <td>@printer.Name</td>
+                <td>@printer.ConnectionType</td>
+                <td>@printer.ConnectionString</td>
+                <td>
+                    <a asp-page="/Features/Printers/Edit/Edit" asp-route-id="@printer.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-page="/Features/Printers/Delete/Delete" asp-route-id="@printer.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

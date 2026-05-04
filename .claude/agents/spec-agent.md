@@ -45,3 +45,6 @@ Anything explicitly not included in this issue.
 - Use `gh` CLI to read the issue. Run `gh auth status` first.
 - Do not write any code.
 - If the issue is ambiguous, note the ambiguity in the spec under an "Open Questions" section.
+- Always describe pages in VSA terms: `Features/<Feature>/<Slice>/Index.cshtml`
+- The route section must map URL → slice folder (e.g. `GET /Printers` → `Features/Printers/List/Index.cshtml`)
+- Specs must list any command/query classes needed in each slice

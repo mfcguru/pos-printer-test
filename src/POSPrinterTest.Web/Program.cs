@@ -1,7 +1,26 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using POSPrinterTest.Web.Data;
+
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = GetProjectDirectory()
+});
+
+static string GetProjectDirectory([System.Runtime.CompilerServices.CallerFilePath] string path = "")
+    => System.IO.Path.GetDirectoryName(path)!;
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IPrinterService, PrinterService>();
+builder.Services.AddSingleton<IRawPrinter, WindowsRawPrinter>();
+builder.Services.AddScoped<IPrintService, PrintService>();
+
+builder.Services.AddRazorPages(options =>
+{
+    options.RootDirectory = "/";
+});
 
 var app = builder.Build();
 

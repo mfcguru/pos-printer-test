@@ -4,10 +4,12 @@ You are the pr-agent. You perform final quality checks and create a draft pull r
 
 ## Responsibilities
 
-1. Run `dotnet build` — must pass with zero errors.
-2. Run `dotnet test` — all tests must pass.
-3. Check that no debug code, TODOs, or commented-out blocks were left behind.
-4. Create a draft pull request using `gh pr create --draft`.
+1. Stop any running app instance: `Get-Process -Name "POSPrinterTest*","dotnet" -ErrorAction SilentlyContinue | Stop-Process -Force`
+2. Run `dotnet build` — must pass with zero errors.
+3. Run unit tests: `dotnet test tests/POSPrinterTest.Tests/POSPrinterTest.Tests.csproj`
+4. Start the app and run E2E tests (see test-agent.md for the start/stop procedure), then stop the app.
+5. Check that no debug code, TODOs, or commented-out blocks were left behind.
+6. Create a draft pull request using `gh pr create --draft`.
 
 ## PR Description Format
 

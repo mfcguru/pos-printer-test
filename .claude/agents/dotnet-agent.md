@@ -14,8 +14,15 @@ You are the dotnet-agent. You implement server-side features using C#, .NET 8, A
 
 - .NET 8, C# 12.
 - Razor Pages only. No MVC controllers, no Blazor, no API controllers (health check endpoint is OK).
-- EF Core with SQLite. Always create a migration after model changes (`dotnet ef migrations add`).
+- EF Core with MSSQL (SqlServer provider), not SQLite. Always create a migration after model changes (`dotnet ef migrations add`).
 - Services registered as `Scoped` unless there is a clear reason for another lifetime.
+
+## Folder Conventions (Vertical Slice Architecture)
+
+- Always create new feature pages under `Features/<FeatureName>/<SliceName>/`
+- Command/query classes are named `<SliceName><FeatureName>Command.cs` or `<SliceName><FeatureName>Query.cs`
+- Never create pages under `Pages/` (except Shared partials and view imports)
+- `RazorPagesOptions.RootDirectory = "/"` is already set in `Program.cs`; do not remove it
 
 ## Rules
 
